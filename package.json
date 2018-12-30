@@ -11,7 +11,7 @@
     "jshint": "^2.9.4"
   },
   "scripts": {
-    "start": "gulp",
+    "start": "parcel serve index.html",
     "test": "npm run test-hint && npm run test-casper",
     "test-hint": "jshint ./script.js",
     "test-casper": "casperjs test ./tests/casper.js",
