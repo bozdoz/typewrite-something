@@ -5,10 +5,8 @@
   "main": "script.js",
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "^2.18.5",
     "casperjs": "^1.1.3",
-    "gulp": "^3.9.1",
-    "jshint": "^2.9.4"
+    "eslint": "^5.14.1"
   },
   "scripts": {
     "start": "parcel serve index.html",
