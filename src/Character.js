@@ -1,11 +1,13 @@
 import { randMargin } from './utils'
 import {
-  pos_vec,
   canvas_offset,
   container_scale,
   container_offset,
   textCtx
 } from './canvas'
+import {
+  position
+} from './Cursor'
 import {
   TRANSLATE_MARGIN,
   ROTATE_MARGIN,
@@ -18,8 +20,11 @@ import Vector from './Vector'
  * Character class for drawing characters on TypeWriter singleton
  */
 function Character(char_str, _x, _y) {
-  var x = randMargin(_x || pos_vec.x, TRANSLATE_MARGIN),
-    y = randMargin(_y || pos_vec.y, TRANSLATE_MARGIN)
+  const x = randMargin(_x || position.get().x, TRANSLATE_MARGIN)
+  const y = randMargin(_y || position.get().y, TRANSLATE_MARGIN)
+
+  // eslint-disable-next-line no-console
+  console.log('character')
 
   this.str = char_str
   this.rotate = randMargin(0, ROTATE_MARGIN)
@@ -31,7 +36,7 @@ function Character(char_str, _x, _y) {
   // save inverse of current typewriter offsets
   // useful for applying future changing offsets
   // in redraw functions
-  this._subtract(canvas_offset.multiplyBy(container_scale))._subtract(
+  this._subtract(canvas_offset.multiplyBy(container_scale.get()))._subtract(
     container_offset
   )
 
@@ -42,12 +47,12 @@ Character.prototype = Object.create(Vector.prototype)
 
 Character.prototype.draw = function() {
   // apply current typewriter offsets
-  var vec = this.add(canvas_offset.divideBy(container_scale))
+  const vec = this.add(canvas_offset.divideBy(container_scale.get()))
 
   textCtx.save()
-  if (container_scale !== 1) {
+  if (container_scale.get() !== 1) {
     textCtx.translate(container_offset.x, container_offset.y)
-    textCtx.scale(container_scale, container_scale)
+    textCtx.scale(container_scale.get(), container_scale.get())
   }
   textCtx.translate(vec.x, vec.y)
   textCtx.rotate(this.rotate)

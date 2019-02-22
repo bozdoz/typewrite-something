@@ -2,13 +2,17 @@
  * Vector class for handling positions
  */
 function Vector (x, y) {
-    this.x = x;
-    this.y = y;
+    this.set(x, y);
 }
 
 Vector.prototype.get = function (axis) {
     return this[axis];
 };
+
+Vector.prototype.set = function (x, y) {
+    this.x = x;
+    this.y = y;
+}
 
 Vector.prototype.add = function (vector) {
     if (typeof(vector) === 'number') {

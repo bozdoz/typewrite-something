@@ -70,7 +70,7 @@ casper.test.begin('Page loads without error', 10, function suite(test) {
                 // setup
                 var position = new Vector(268,159),
                     letter_offset = new Vector(letter_width/2, line_height/2),
-                    output = pos_vec.add(letter_offset);
+                    output = position.get().add(letter_offset);
 
                 return [output.x, output.y];
             }, [268,159], 'Cursor and click positions match : 268, 159');

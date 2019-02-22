@@ -1,18 +1,18 @@
 import { NO_AUDIO, IS_IOS } from './constants'
 import options from './options'
 import { makeMultiAudio } from './utils'
-import { cursorInput, container, letter_width, line_height } from './canvas'
+import { cursorInput, container } from './canvas'
 import DOMEvent from './events'
-import { pos_vec } from './Cursor'
+import { position } from './Cursor'
 import TypeWriter from './TypeWriter'
 import Vector from './Vector'
 
 const ENTER = 13
 
 const keypress_audio =
-  window.keypress_audio || new makeMultiAudio('/assets/keypress.mp3', 5)
+  window.keypress_audio || new makeMultiAudio('/assets/sounds/keypress.mp3', 5)
 const newline_audio =
-  window.newline_audio || new makeMultiAudio('/assets/return.mp3', 2)
+  window.newline_audio || new makeMultiAudio('/assets/sounds/return.mp3', 2)
 
 function App() {
   let mouseuptimeout
@@ -24,6 +24,9 @@ function App() {
   // let zoom_scale;
   // let zoom_center_diff;
   const typewriter = new TypeWriter()
+
+  // eslint-disable-next-line no-console
+  console.log('app')
 
   this.running = true
 
@@ -48,20 +51,21 @@ function App() {
   }
 
   this.events = function(_onoff) {
-    var onoff = _onoff || 'on',
-      document_events = {
-        mouseup: mouseup,
-        touchend: touchend,
-        mousedown: mousedown,
-        touchstart: touchstart
-      },
-      cursor_events = {
-        keydown: keydown,
-        keyup: keyup,
-        focus: focus
-      },
-      key,
-      fnc
+    console.log('this.events')
+    const onoff = _onoff || 'on';
+    const document_events = {
+        mouseup,
+        touchend,
+        mousedown,
+        touchstart,
+      };
+    const cursor_events = {
+        keydown,
+        keyup,
+        focus,
+      };
+    let key;
+    let fnc;
 
     for (key in document_events) {
       fnc = document_events[key]
@@ -78,10 +82,12 @@ function App() {
     }
   }
 
+  this.start()
+
+  /**
+   * keydown handles audio
+   */
   function keydown(e) {
-    /*
-                keydown handles audio
-                */
     var no_audio = NO_AUDIO[e.which]
 
     if (!no_audio && options.play_audio) {
@@ -94,7 +100,7 @@ function App() {
     }
 
     if (no_audio === 'TAB') {
-      /* todo : add 2 or 4 spaces */
+      // TODO : add 2 or 4 spaces
 
       // refocus
       window.setTimeout(function() {
@@ -110,6 +116,8 @@ function App() {
      */
     var nav = typewriter.cursor.nav[e.which],
       value = this.value.substr(1)
+
+    console.log('keyup')
 
     if (!value && !nav) return
 
@@ -199,7 +207,7 @@ function App() {
 
   function updateCursor(e) {
     var _position = getPositionFromEvent(e),
-      letter_offset = new Vector(letter_width / 2, line_height / 2),
+      letter_offset = new Vector(options.letter_width / 2, options.line_height / 2),
       _newpos = _position.subtract(letter_offset)
     typewriter.cursor.update(_newpos)
     cursorInput.focus()
@@ -304,8 +312,6 @@ function App() {
   )
 }
 
-const main = new App()
-
 /**
  * basic app handlers
  */
@@ -318,9 +324,9 @@ function forceSpace() {
 
 function getPositionFromEvent(e) {
   var touch = (e.touches && e.touches[0]) || {},
-    _x = e.clientX || touch.clientX || pos_vec.x,
-    _y = e.clientY || touch.clientY || pos_vec.y
+    _x = e.clientX || touch.clientX || position.get().x,
+    _y = e.clientY || touch.clientY || position.get().y
   return new Vector(_x, _y)
 }
 
-export default main
+export default App

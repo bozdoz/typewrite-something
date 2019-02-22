@@ -8,7 +8,11 @@ export let padding_vec = (function() {
     _y = Math.min(_x, window.innerHeight / 8)
   return new Vector(_x, _y)
 })()
-export let pos_vec = padding_vec
+export const position = {
+  _value: padding_vec,
+  get: function () { return this._value },
+  set: function (value) { this._value = value },
+}
 
 /**
  * Cursor singleton for controlling cursor
@@ -17,8 +21,11 @@ export let pos_vec = padding_vec
 function Cursor() {
   var _cursor_timeout, _raf, _time, _opacity
 
+  // eslint-disable-next-line no-console
+  console.log('cursor')
+
   this.clear = function() {
-    var _pos = pos_vec.subtract(1).divideBy(container_scale)
+    var _pos = position.get().subtract(1).divideBy(container_scale.get())
 
     cursorCtx.clearRect(_pos.x, _pos.y, options.letter_width + 2, options.line_height + 2)
   }
@@ -26,14 +33,14 @@ function Cursor() {
   this.update = function(vec) {
     this.clear()
 
-    pos_vec = vec
+    position.set(vec)
     cursorInput.style.left = Math.min(vec.x, window.innerWidth) + 'px'
     cursorInput.style.top = Math.min(vec.y, window.innerHeight) + 'px'
     this.draw()
   }
 
   this._draw = function() {
-    var _pos = pos_vec.divideBy(container_scale)
+    var _pos = position.get().divideBy(container_scale.get())
 
     cursorCtx.fillRect(_pos.x, _pos.y, options.letter_width, options.line_height)
   }
@@ -50,7 +57,7 @@ function Cursor() {
   }
 
   this.nudge = function(vec) {
-    this.update(pos_vec.add(vec.multiplyBy(container_scale)))
+    this.update(position.get().add(vec.multiplyBy(container_scale.get())))
   }
 
   this.moveleft = function() {
@@ -75,7 +82,7 @@ function Cursor() {
                 moving to x = previous click location
                 instead of paddingx
                 */
-    this.update(new Vector(padding_vec.x, pos_vec.y + options.line_height))
+    this.update(new Vector(padding_vec.x, position.get().y + options.line_height))
   }
 
   this.fadeOut = function() {

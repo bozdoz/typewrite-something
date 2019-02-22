@@ -6,10 +6,12 @@
   "dependencies": {},
   "devDependencies": {
     "casperjs": "^1.1.3",
-    "eslint": "^5.14.1"
+    "eslint": "^5.14.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "start": "parcel serve index.html",
+    "start": "webpack --watch",
     "test": "npm run test-hint && npm run test-casper",
     "test-hint": "jshint ./script.js",
     "test-casper": "casperjs test ./tests/casper.js",

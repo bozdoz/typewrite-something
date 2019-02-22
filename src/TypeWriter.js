@@ -15,7 +15,7 @@ import DOMEvent from './events'
 import Character from './Character'
 import Cursor, {
   // eslint-disable-next-line no-unused-vars
-  pos_vec, 
+  position, 
   padding_vec,
 } from './Cursor'
 import Vector from './Vector'
@@ -25,6 +25,9 @@ let chars = []
 function TypeWriter() {
 
   this.cursor = new Cursor();
+
+  // eslint-disable-next-line no-console
+  console.log('typewriter')
   
   /**
    * TypeWriter singleton for handling characters
@@ -75,7 +78,7 @@ function TypeWriter() {
     textCtx.fillStyle = TEXT_COLOR
 
     cursorCtx.fillStyle = CURSOR_COLOR
-    cursorCtx.scale(container_scale, container_scale)
+    cursorCtx.scale(container_scale.get(), container_scale.get())
   }
 
   this.reposition = function(vec) {
@@ -96,14 +99,14 @@ function TypeWriter() {
   this.reset = function() {
     // back to original blank canvas
     chars = []
-    pos_vec = padding_vec
-    canvas_offset = new Vector(0, 0)
-    container_origin = new Vector(0, 0)
-    container_scale = 1
+    position.set(padding_vec)
+    canvas_offset.set(0, 0)
+    container_origin.set(0, 0)
+    container_scale.set(1)
     container.setAttribute('style', '')
 
     this.reposition()
-    Cursor.draw()
+    this.cursor.draw()
     cursorInput.focus()
   }
 
