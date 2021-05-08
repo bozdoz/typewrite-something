@@ -67,8 +67,14 @@ class SavedList {
       onclick: async () => {
         try {
           await importSaved();
+          window.gtag('event', 'menu:view-saved:import', {
+            event_category: 'menu',
+          });
         } catch (e) {
-          // not sure
+          // TODO: add sentry
+          window.gtag('event', 'menu:view-saved:import-failed', {
+            event_category: 'menu',
+          });
         } finally {
           this.refreshList();
         }
