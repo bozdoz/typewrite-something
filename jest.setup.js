@@ -1,2 +1,2 @@
 // stubbed out since gtag can be used anywhere, without initializing
-window.gtag = () => {};
+window.gtag = jest.fn();
