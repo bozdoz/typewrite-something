@@ -3,8 +3,8 @@ import * as Storage from './Storage';
 import prettyDate from './utils/prettyDate';
 import { exportSaved, importSaved } from './utils/importExportSaved';
 
+// TODO: This should just extend from Dialog
 // TODO: add search
-// TODO: add cancel button
 class SavedList {
   // TODO: might need to separate these backdrops into a new class
   backdrop = createElement('div', {
@@ -26,6 +26,9 @@ class SavedList {
   exportButton: HTMLButtonElement;
 
   importButton: HTMLButtonElement;
+
+  /** used for tests */
+  closeButton: HTMLButtonElement;
 
   clickCallback: (si: Storage.SavedItem) => void | boolean = () => {};
 
@@ -81,18 +84,20 @@ class SavedList {
       },
     });
 
-    const closeButton = createElement('button', {
+    this.closeButton = createElement('button', {
       className: 'button',
       type: 'button',
       innerHTML: 'Close',
-      onclick: this.close.bind(this),
+      onclick: () => {
+        this.close();
+      },
     });
 
     this.refreshList();
 
     this.dialogFooter.appendChild(this.exportButton);
     this.dialogFooter.appendChild(this.importButton);
-    this.dialogFooter.appendChild(closeButton);
+    this.dialogFooter.appendChild(this.closeButton);
     this.dialog.appendChild(this.dialogBody);
     this.dialog.appendChild(this.dialogFooter);
     this.backdrop.appendChild(this.dialog);
