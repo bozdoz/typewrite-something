@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-/* eslint-disable @typescript-eslint/no-var-requires */
 describe('isDebugMode', () => {
   it('is not debug mode by default', () => {
     expect(window.location.search).toBeFalsy();

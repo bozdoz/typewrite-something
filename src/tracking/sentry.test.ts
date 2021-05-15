@@ -16,7 +16,6 @@ describe('sentry', () => {
       process.env.NODE_ENV = 'development';
 
       jest.isolateModules(() => {
-        // eslint-disable-next-line global-require
         require('./sentry');
       });
     });
@@ -39,7 +38,6 @@ describe('sentry', () => {
       process.env.NODE_ENV = 'production';
 
       jest.isolateModules(() => {
-        // eslint-disable-next-line global-require
         require('./sentry');
       });
     });

@@ -8,13 +8,12 @@ const loadScript = (
   script.async = true;
   script.src = src;
 
-  // eslint-disable-next-line guard-for-in
   for (const key in options) {
     const typedKey = key as keyof typeof options;
     (script as any)[typedKey] = options[typedKey];
   }
 
-  firstScript.parentNode!.insertBefore(script, firstScript);
+  firstScript.parentNode?.insertBefore(script, firstScript);
 };
 
 export default loadScript;

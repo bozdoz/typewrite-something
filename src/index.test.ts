@@ -37,7 +37,6 @@ describe('index', () => {
 
     // re-add index file
     jest.isolateModules(() => {
-      // eslint-disable-next-line global-require
       require('./index');
     });
   });

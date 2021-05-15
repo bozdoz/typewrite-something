@@ -1,6 +1,3 @@
-/* eslint-disable global-require */
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 import waitFor from './waitFor';
 
 describe('waitFor', () => {
@@ -12,7 +9,6 @@ describe('waitFor', () => {
     jest.clearAllTimers();
     jest.useFakeTimers();
   });
-  // const error = jest.fn();
 
   it('does not wait when immediately true', (done) => {
     check.mockImplementationOnce(() => true);
