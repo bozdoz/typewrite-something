@@ -36,5 +36,4 @@ declare interface Window {
   gtag: GTag;
   sentry: Sentry;
   Sentry: any;
-  Integrations: any;
 }

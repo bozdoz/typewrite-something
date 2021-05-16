@@ -10,9 +10,9 @@ window.sentry = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  loadScript('https://browser.sentry-cdn.com/6.2.5/bundle.min.js', {
+  loadScript('https://browser.sentry-cdn.com/6.3.6/bundle.tracing.min.js', {
     integrity:
-      'sha384-+0tgGyP4idWu9/NA6Jbmnj3SApxIg65/GR1zo3qSieRNyzmmDQ/5a1Yu6mfmUw+v',
+      'sha384-i2Yvbs5RFObbcbRhpGsmI2wLv+I4jxpEET1WzR/KWxLdwZMtP8E1M0PROnrwe2gF',
     crossOrigin: 'anonymous',
   });
 
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
 
       // To set your release version
       release: `typewritesomething@${process.env.npm_package_version}`,
-      integrations: [new window.Integrations.BrowserTracing()],
+      integrations: [new window.Sentry.Integrations.BrowserTracing()],
 
       // Set tracesSampleRate to 1.0 to capture 100%
       // of transactions for performance monitoring.
