@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - staging
 
 jobs:
   createSentryRelease:
@@ -21,7 +20,6 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: VERSION=$(node -e "console.log(require('./package.json').version)") && echo "VERSION=${VERSION}" >> $GITHUB_ENV
-      - run: echo $VERSION
       - run: echo ${{ env.VERSION }}
       - name: Create Sentry release
         uses: getsentry/action-release@v1
