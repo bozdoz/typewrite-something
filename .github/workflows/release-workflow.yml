@@ -25,7 +25,9 @@ jobs:
       - run: export SENTRY_ORG=bozdoz
       - run: export SENTRY_PROJECT=tws
       - run: export VERSION=$(node -e "console.log(require('./package.json').version)")
-      - run: npx sentry-cli releases new -p $SENTRY_PROJECT $VERSION
+      - run: echo $VERSION
+      - run: echo $SENTRY_PROJECT
+      - run: npx sentry-cli releases new $VERSION -p $SENTRY_PROJECT 
       - run: npx sentry-cli releases set-commits --auto $VERSION
       - run: npx sentry-cli releases files $VERSION upload-sourcemaps dist/
       - run: npx sentry-cli releases finalize $VERSION
