@@ -1,5 +1,3 @@
-import { DEFAULT_EXTENSIONS } from '@babel/core';
-import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
@@ -24,11 +22,6 @@ const commonPlugins = [
   commonjs(),
   typescript(),
   nodeResolve(),
-  babel({
-    exclude: 'node_modules/**',
-    babelHelpers: 'bundled',
-    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
-  }),
 ];
 
 const plugins = isProduction
