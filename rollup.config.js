@@ -20,7 +20,10 @@ const commonPlugins = [
     'process.env.git_hash': JSON.stringify(gitHash),
   }),
   commonjs(),
-  typescript(),
+  typescript({
+    // want to send sourcemaps to sentry
+    sourceMap: true,
+  }),
   nodeResolve(),
 ];
 
@@ -36,7 +39,7 @@ export default () => {
       // vercel builds to dist then copies dist to root, so
       // we need to build to dist/dist... madness
       file: isProduction ? `dist/dist/main.js` : `dist/main.js`,
-      sourcemap: !isProduction,
+      sourcemap: true,
       format: 'cjs',
     },
   };
@@ -53,7 +56,7 @@ export default () => {
       output: {
         // vercel builds to dist then copies dist to root
         file: isProduction ? `dist/sw.js` : 'sw.js',
-        sourcemap: false,
+        sourcemap: true,
         format: 'cjs',
         strict: false,
       },
