@@ -1,22 +1,13 @@
-name: Builds
+name: ReleaseWorkflow
 
 on:
-  pull_request:
-    paths:
-      - '**.js'
-      - '**.ts'
-      - '.github/workflows/**.yml'
   push:
     branches:
       - master
       - staging
-    paths:
-      - '**.js'
-      - '**.ts'
-      - '.github/workflows/**.yml'
-      
+
 jobs:
-  build:
+  createSentryRelease:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,8 +20,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
-      - run: npm run lint
-      - run: npm run test:coverage
-      - uses: codecov/codecov-action@v1
+      - name: Create a Sentry.io release
+        uses: tclindner/sentry-releases-action@v1.2.0
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: bozdoz
+          SENTRY_PROJECT: tws
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          tagName: ${{ github.ref }}
+          environment: production
+          sourceMapOptions: '{"include": ["dist/*"]}'
