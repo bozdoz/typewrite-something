@@ -20,13 +20,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
-      - name: Create a Sentry.io release
-        uses: tclindner/sentry-releases-action@v1.2.0
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: bozdoz
-          SENTRY_PROJECT: tws
-        with:
-          tagName: ${{ github.ref }}
-          environment: production
-          sourceMapOptions: '{"include": ["dist/*"]}'
+      - run: npm i @sentry/cli
+      - run: export SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+      - run: export SENTRY_ORG=bozdoz
+      - run: export SENTRY_PROJECT=tws
+      - run: export VERSION=$(node -e "console.log(require('./package.json').version)")
+      - run: npx sentry-cli releases new -p $SENTRY_PROJECT $VERSION
+      - run: npx sentry-cli releases set-commits --auto $VERSION
+      - run: npx sentry-cli releases files $VERSION upload-sourcemaps dist/
+      - run: npx sentry-cli releases finalize $VERSION
