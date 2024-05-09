@@ -12,13 +12,13 @@ on:
     paths:
       - '**.js'
       - '.github/workflows/**.yml'
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [20.x]
     steps:
       - uses: actions/checkout@v2
       - name: Setup node ${{ matrix.node-version }}
