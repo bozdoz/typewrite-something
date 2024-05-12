@@ -6,7 +6,6 @@
 import App from './App';
 import isDebugMode from './helpers/isDebugMode';
 import './tracking/analytics';
-import './tracking/sentry';
 
 const splash = document.getElementById('splash')!;
 

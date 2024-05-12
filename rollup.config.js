@@ -18,6 +18,7 @@ const commonPlugins = [
     'process.env.NODE_ENV': JSON.stringify(NODE_ENV || 'development'),
     'process.env.npm_package_version': JSON.stringify(npm_package_version),
     'process.env.git_hash': JSON.stringify(gitHash),
+    preventAssignment: true,
   }),
   commonjs(),
   typescript({

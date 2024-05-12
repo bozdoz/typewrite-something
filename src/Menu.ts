@@ -98,7 +98,7 @@ class Menu {
 
     this.openMenu({ x, y });
 
-    window.gtag('event', 'menu:open', {
+    window.gtag?.('event', 'menu:open', {
       event_category: 'menu',
     });
   };

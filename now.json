@@ -21,8 +21,5 @@
       "src": "./manifest.json",
       "use": "@now/static"
     }
-  ],
-  "github": {
-    "autoAlias": false
-  }
+  ]
 }

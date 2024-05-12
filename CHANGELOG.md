@@ -1,3 +1,5 @@
+# Changelog
+
 ## 1.0.3 (2021-04-15)
 
 ### Bug Fixes
