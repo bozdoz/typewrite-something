@@ -4,3 +4,4 @@ dist
 coverage/
 .eslintcache
 /sw.js
+.DS_Store
