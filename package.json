@@ -1,6 +1,6 @@
 {
   "name": "typewritesomething",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A minimalist typewriter simulator to inspire creative writing",
   "private": true,
   "scripts": {
