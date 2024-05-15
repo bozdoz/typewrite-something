@@ -1,5 +1,3 @@
-import { DEFAULT_EXTENSIONS } from '@babel/core';
-import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
@@ -23,13 +21,11 @@ const commonPlugins = [
     preventAssignment: true,
   }),
   commonjs(),
-  typescript(),
-  nodeResolve(),
-  babel({
-    exclude: 'node_modules/**',
-    babelHelpers: 'bundled',
-    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
+  typescript({
+    // want to send sourcemaps to sentry
+    sourceMap: true,
   }),
+  nodeResolve(),
 ];
 
 const plugins = isProduction
@@ -44,7 +40,7 @@ export default () => {
       // vercel builds to dist then copies dist to root, so
       // we need to build to dist/dist... madness
       file: isProduction ? `dist/dist/main.js` : `dist/main.js`,
-      sourcemap: !isProduction,
+      sourcemap: true,
       format: 'cjs',
     },
   };
@@ -61,7 +57,7 @@ export default () => {
       output: {
         // vercel builds to dist then copies dist to root
         file: isProduction ? `dist/sw.js` : 'sw.js',
-        sourcemap: false,
+        sourcemap: true,
         format: 'cjs',
         strict: false,
       },
