@@ -8,7 +8,6 @@
     "build": "NODE_ENV=production rollup -c",
     "lint": "eslint ./src --ext .js,.ts",
     "test:coverage": "jest --coverage",
-    "postinstall": "tsc --noEmit",
     "test": "jest",
     "watch": "npm-run-all -p watch:*",
     "watch:js": "rollup -c -w",
