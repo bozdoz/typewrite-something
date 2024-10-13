@@ -1,39 +1,43 @@
+import process from "node:process";
 interface GTag {
+  // deno-lint-ignore no-explicit-any
   (...args: any[]): void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare interface Window {
+  // deno-lint-ignore no-explicit-any
   dataLayer: any[];
   gtag: GTag;
 }
 
 const loadScript = (src: string) => {
-  const script = document.createElement('script');
-  const firstScript = document.getElementsByTagName('script')[0];
+  const script = document.createElement("script");
+  const firstScript = document.getElementsByTagName("script")[0];
   script.async = true;
   script.src = src;
   firstScript.parentNode!.insertBefore(script, firstScript);
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // breaks down the snippet given by google analytics
-  loadScript('https://www.googletagmanager.com/gtag/js?id=UA-73887811-5');
+  loadScript("https://www.googletagmanager.com/gtag/js?id=UA-73887811-5");
 
-  window.dataLayer = window.dataLayer || [];
+  globalThis.dataLayer = globalThis.dataLayer || [];
 
   // eslint-disable-next-line no-inner-declarations
+  // deno-lint-ignore no-inner-declarations
   function gtag() {
     // eslint-disable-next-line prefer-rest-params
-    window.dataLayer.push(arguments);
+    globalThis.dataLayer.push(arguments);
   }
 
-  window.gtag = gtag;
+  globalThis.gtag = gtag;
 
-  window.gtag('js', new Date());
+  globalThis.gtag("js", new Date());
 
-  window.gtag('config', 'UA-73887811-5');
+  globalThis.gtag("config", "UA-73887811-5");
 } else {
   // eslint-disable-next-line no-console
-  window.gtag = console.log;
+  globalThis.gtag = console.log;
 }
