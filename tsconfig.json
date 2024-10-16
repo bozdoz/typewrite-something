@@ -3,13 +3,15 @@
     "alwaysStrict": false,
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "baseUrl": ".",
     "declaration": false,
     "lib": [
       "ES2019",
       "dom"
     ],
-    "module": "es2015",
+    "module": "ES2020",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noUnusedLocals": true,

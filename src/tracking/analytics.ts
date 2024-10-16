@@ -25,14 +25,10 @@ if (process.env.NODE_ENV === "production") {
 
   globalThis.dataLayer = globalThis.dataLayer || [];
 
-  // eslint-disable-next-line no-inner-declarations
-  // deno-lint-ignore no-inner-declarations
-  function gtag() {
+  globalThis.gtag = function gtag() {
     // eslint-disable-next-line prefer-rest-params
     globalThis.dataLayer.push(arguments);
-  }
-
-  globalThis.gtag = gtag;
+  };
 
   globalThis.gtag("js", new Date());
 

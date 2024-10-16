@@ -1,3 +1,4 @@
+// @deno-types=npm:@types/jest
 import { fireEvent } from "@testing-library/dom";
 
 const appStart = jest.fn();
@@ -38,8 +39,7 @@ describe("index", () => {
     document.body.append(splash);
 
     // add js
-    // eslint-disable-next-line global-require
-    require("./index");
+    import("./index.ts");
   });
 
   it("gives focus to splash on load", () => {

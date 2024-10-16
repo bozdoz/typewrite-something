@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run watch",
     "build": "NODE_ENV=production deno run --allow-env --allow-read --allow-run ./build.ts",
+    "check": "deno check --unstable-sloppy-imports ./src",
     "lint": "deno lint ./src",
     "test:coverage": "jest --coverage",
     "test": "jest",

@@ -24,6 +24,7 @@ jobs:
           deno-version: v2.x
       - run: deno install
       - run: deno task build
+      - run: deno task check
       - run: deno task lint
       - run: deno task test:coverage
       - uses: codecov/codecov-action@v4
