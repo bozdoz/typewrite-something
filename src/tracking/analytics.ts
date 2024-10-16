@@ -1,4 +1,3 @@
-import process from "node:process";
 interface GTag {
   // deno-lint-ignore no-explicit-any
   (...args: any[]): void;
@@ -19,6 +18,7 @@ const loadScript = (src: string) => {
   firstScript.parentNode!.insertBefore(script, firstScript);
 };
 
+// deno-lint-ignore no-process-globals
 if (process.env.NODE_ENV === "production") {
   // breaks down the snippet given by google analytics
   loadScript("https://www.googletagmanager.com/gtag/js?id=UA-73887811-5");

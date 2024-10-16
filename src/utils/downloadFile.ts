@@ -6,6 +6,5 @@ export const downloadFile = (filename: string, data: string) => {
   a.click();
 };
 
-// deno-lint-ignore no-explicit-any
-export const JSONToFileString = (json: any): string =>
+export const JSONToFileString = (json: unknown): string =>
   `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(json))}`;

@@ -5,8 +5,6 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "lib": [
       "ES2019",
       "dom"
@@ -16,7 +14,6 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "outDir": "dist",
-    "pretty": true,
     "rootDir": ".",
     "strict": true,
     "target": "es5",
