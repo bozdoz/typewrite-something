@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup deno!
-        uses: actions/setup-deno@v2
+        uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
       - run: deno install
