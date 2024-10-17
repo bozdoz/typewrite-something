@@ -20,7 +20,7 @@ const { NODE_ENV = "development" } = process.env;
 const build = async () => {
   await esbuild.build({
     entryPoints: ["./src/index.ts", "./src/sw.js"],
-    outdir: "./",
+    outdir: "./dist",
     bundle: true,
     format: "cjs",
     define: {
