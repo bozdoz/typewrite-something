@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["DOM"]
+    "lib": ["deno.ns", "DOM"]
   },
   "lint": {
     "rules": {

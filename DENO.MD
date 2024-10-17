@@ -53,7 +53,26 @@ If I didn't ignore the file for linting I would get:
 >
 >  docs: https://lint.deno.land/rules/no-var
 
+All of a sudden my typechecks failed with crazy errors like:
 
+```
+error: TS2318 [ERROR]: Cannot find global type 'Array'.
+```
+
+I had to add "deno.ns" to my deno.json, but I have no idea why.  
+
+Then the global.d.ts complained:
+
+```
+TS2503 [ERROR]: Cannot find namespace 'NodeJS'.
+declare var process: NodeJS.Process;
+```
+
+So I had to add another type to that file:
+
+```ts
+/// <reference types="npm:@types/node" />
+```
 
 ## Benchmarks
 
