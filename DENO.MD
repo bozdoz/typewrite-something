@@ -24,7 +24,7 @@ Needed to add to my tsconfig.json:
     "module": "ES2020",
 ```
 
-This is because I was running `require('index')` in the index test.
+This is because I was running `require('index')` in the index test. For this I needed to update typescript to latest.
 
 I needed to import tests to a single test file in order for Deno to pick up on Jest types:
 
