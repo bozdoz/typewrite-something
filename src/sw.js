@@ -1,4 +1,3 @@
-import process from "node:process";
 const CACHE_NAME =
   `typewritesomething@${process.env.npm_package_version}-${process.env.git_hash}`;
 

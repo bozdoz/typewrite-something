@@ -17,7 +17,7 @@ jobs:
         with:
           deno-version: v2.x
       - run: deno install
-      - run: deno task build
+      - run: NODE_ENV=production deno task build
       - name: Install Vercel CLI
         run: deno install --global -A npm:vercel
       - name: Pull Vercel Environment Information

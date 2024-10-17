@@ -23,7 +23,6 @@ const build = async () => {
     outdir: "./dist",
     bundle: true,
     format: "cjs",
-    platform: "node",
     define: {
       "process.env.NODE_ENV": `"${NODE_ENV}"`,
       "process.env.npm_package_version": `"${pkg.version}"`,

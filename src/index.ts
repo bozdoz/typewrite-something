@@ -4,7 +4,6 @@
 import App from "./App";
 import isDebugMode from "./helpers/isDebugMode";
 import "./tracking/analytics";
-import process from "node:process";
 
 const splash = document.getElementById("splash")!;
 
